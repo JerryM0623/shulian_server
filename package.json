@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",
-    "koa": "^2.13.4"
+    "koa": "^2.13.4",
+    "koa-router": "^7.4.0"
   }
 }
