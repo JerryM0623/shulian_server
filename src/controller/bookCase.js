@@ -118,8 +118,46 @@ const deleteMultiBooks = async (ctx) => {
     }
 }
 
+const addBook = async (ctx) => {
+    const cookie = ctx.headers.cookie;
+    const { session, token, aid } = ctx.request.body;
+    try {
+        if (cookie && session && token){
+            if (aid !== ""){
+                const res = await axios.post('http://j.facerome.com/modules/article/addbookcase.php', {
+                    "bid": aid,
+                    "time": await getTimeStamp(),
+                    "jieqi_token": token
+                }, {
+                    headers: {
+                        "SESSIONID": session,
+                        "user-agent": 'Mozilla/5.0 (Linux; Android 12; M2006J10C Build/SP1A.210812.016; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/103.0.5060.129 Mobile Safari/537.36 uni-app Html5Plus/1.0 (Immersed/34.909092)',
+                        "Host": "j.facerome.com",
+                        "Connection": "Keep-Alive",
+                        "Accept-Encoding": "gzip",
+                        "Cookie": cookie,
+                        "Content-Type": "application/json"
+                    }
+                })
+                if (res.data.data === "恭喜您，该小说已经加入书架！"){
+                    ctx.body = await createResponse(200, "该小说已经加入书架", "");
+                }else {
+                    ctx.body = await createResponse(501, "加入失败请重试", "");
+                }
+            }else {
+                ctx.body = await createResponse(500, "请求错误，请稍后重试");
+            }
+        }else {
+            ctx.body = await createResponse(500, "请重新登录账号", "");
+        }
+    }catch (e) {
+        throw e;
+    }
+}
+
 module.exports = {
     getBookCaseList,
     deleteOneBook,
-    deleteMultiBooks
+    deleteMultiBooks,
+    addBook
 }
