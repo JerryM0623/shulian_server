@@ -30,7 +30,6 @@ const loginController = async (ctx) => {
                 const cookieParserArray = await parserCookies(res.headers["set-cookie"]);
                 // console.log(cookieParserArray)
                 cookieParserArray.forEach(cookieObj => {
-                    console.log(cookieObj.maxAge);
                     ctx.cookies.set(cookieObj.cookieName, cookieObj.cookieBody, {
                         domain: "j.facerome.com",
                         path: cookieObj.path ? cookieObj.path : "/",
