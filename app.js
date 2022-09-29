@@ -1,8 +1,12 @@
 const Koa = require('koa');
 const Router = require('koa-router');
+const bodyParser = require('koa-bodyparser');
 
 const app = new Koa();
 const router = new Router();
+
+// 启用 bodyParser
+app.use(bodyParser());
 
 // 引入分路由
 const loginRouter = require('./src/router/login');
