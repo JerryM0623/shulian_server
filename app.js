@@ -12,11 +12,13 @@ app.use(bodyParser());
 const loginRouter = require('./src/router/login');
 const indexPageRouter = require('./src/router/indexPage');
 const searchRouter = require('./src/router/search');
+const bookDetailRouter = require('./src/router/bookDetail');
 
 // 启用分路由
 router.use('/login', loginRouter.routes(), loginRouter.allowedMethods());
 router.use('/main', indexPageRouter.routes(), indexPageRouter.allowedMethods());
 router.use('/search', searchRouter.routes(), searchRouter.allowedMethods());
+router.use('/book',bookDetailRouter.routes(), bookDetailRouter.allowedMethods())
 
 // 启用 router
 app.use(router.routes()).use(router.allowedMethods());
