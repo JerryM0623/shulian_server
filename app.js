@@ -10,9 +10,11 @@ app.use(bodyParser());
 
 // 引入分路由
 const loginRouter = require('./src/router/login');
+const indexPageRouter = require('./src/router/indexPage');
 
 // 启用分路由
 router.use('/login', loginRouter.routes(), loginRouter.allowedMethods());
+router.use('/main', indexPageRouter.routes(), indexPageRouter.allowedMethods());
 
 // 启用 router
 app.use(router.routes()).use(router.allowedMethods());
