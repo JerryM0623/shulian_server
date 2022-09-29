@@ -1,6 +1,5 @@
 const Router = require('koa-router');
 const { getResult, getHotKeywords } = require('../controller/search');
-const {search} = require("koa/lib/request");
 
 const searchRouter = new Router();
 
