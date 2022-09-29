@@ -29,7 +29,11 @@ const getTypeDetail = async (ctx) => {
                         "jieqi_token": token
                     }
                 })
-                console.log(res.data.data.articlerows)
+                if (res.data.data.articlerows.length > 0){
+                    ctx.body = await createResponse(200, "获取成功", res.data.data.articlerows);
+                }else {
+                    ctx.body = await createResponse(501, "系统错误请稍后重试", "");
+                }
             }else {
                 ctx.body = await createResponse(500, "请重新登录账号", "");
             }
