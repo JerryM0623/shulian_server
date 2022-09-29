@@ -1,5 +1,6 @@
 const {createResponse} = require("../utils/createResponse");
 const {getTimeStamp} = require("../utils/getTimeStamp");
+const {getBookIdRequest, getBookDetailRequest} = require('../request/searchBookRequest')
 const axios = require("axios");
 
 const getHotKeywords = async (ctx) => {
@@ -73,7 +74,29 @@ const getUserResult = async (ctx) => {
 }
 
 const getBookResult = async (ctx) => {
-
+    const cookie = ctx.headers.cookie;
+    const { session, token, keyWord } = ctx.request.body;
+    try {
+        if(cookie && session && token && keyWord){
+            // 获取id
+            const res = await getBookIdRequest(session, token, cookie, keyWord);
+            if (res === "request fail"){
+                ctx.body = await createResponse(501, "系统错误请稍后重试", "");
+            }else {
+                // 获取信息
+                const bookDetail = await getBookDetailRequest(session, token, cookie, res);
+                if (bookDetail === "request fail"){
+                    ctx.body = await createResponse(501, "系统错误请稍后重试", "");
+                }else {
+                    ctx.body = await createResponse(200, "获取成功", bookDetail);
+                }
+            }
+        }else {
+            ctx.body = await createResponse(500, "请重新登录账号", "");
+        }
+    }catch (e){
+        throw e;
+    }
 }
 
 module.exports = {
