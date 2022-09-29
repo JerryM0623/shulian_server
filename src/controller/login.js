@@ -31,7 +31,6 @@ const loginController = async (ctx) => {
                 // console.log(cookieParserArray)
                 cookieParserArray.forEach(cookieObj => {
                     ctx.cookies.set(cookieObj.cookieName, cookieObj.cookieBody, {
-                        domain: "j.facerome.com",
                         path: cookieObj.path ? cookieObj.path : "/",
                         maxAge: cookieObj.maxAge ? cookieObj.maxAge : (60 * 60 * 1000),
                         expires: cookieObj.expires ? new Date(cookieObj.expires) : new Date(Date.now() + (60 * 60 * 1000)),
