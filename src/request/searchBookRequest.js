@@ -38,7 +38,7 @@ const getBookIdRequest = async (keyWord) => {
             // 第二种情况：模糊搜索了很多书
             return {
                 totalResNum: res.data.data.allresults,
-                totalPageNum: (res.data.data.allresults) / (res.data.data.resultcount),
+                totalPageNum: res.data.data.jieqi_page_totalpages,
                 results: res.data.data.articlerows
             }
         }else{
@@ -121,10 +121,14 @@ const getNextPageBook = async (keyWord, page) => {
         }
     })
 
+    if (page === 10){
+        console.log(res.data)
+    }
+
     if (res.data.code === 0 && res.data.message === ""){
         return {
             totalResNum: res.data.data.allresults,
-            totalPageNum: (res.data.data.allresults) / (res.data.data.resultcount),
+            totalPageNum: res.data.data.jieqi_page_totalpages,
             results: res.data.data.articlerows
         }
     }else {
