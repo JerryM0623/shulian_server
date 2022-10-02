@@ -2,10 +2,10 @@ const {createResponse} = require("../utils/createResponse");
 const axios = require("axios");
 const {getTimeStamp} = require("../utils/getTimeStamp");
 const getUserDetail = async (ctx) => {
-    const cookie = ctx.headers.cookie;
+    // const cookie = ctx.headers.cookie;
     const { session, token } = ctx.query;
     try {
-        if (cookie && session && token){
+        if (session && token){
             const res = await axios.get('http://j.facerome.com/userdetail.php', {
                 headers: {
                     "SESSIONID": session,
@@ -13,7 +13,7 @@ const getUserDetail = async (ctx) => {
                     "Host": "j.facerome.com",
                     "Connection": "Keep-Alive",
                     "Accept-Encoding": "gzip",
-                    "Cookie": cookie,
+                    // "Cookie": cookie,
                 },
                 params: {
                     "time": await getTimeStamp(),
