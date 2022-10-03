@@ -27,10 +27,10 @@ const deleteOneBookFun = async (cookie, session, token, bid) => {
 }
 
 const getBookCaseList = async (ctx) => {
-    const cookie = ctx.headers.cookie;
+    // const cookie = ctx.headers.cookie;
     const { session, token } = ctx.query;
     try {
-        if (cookie && session && token){
+        if (session && token){
             const res = await  axios.get('http://j.facerome.com/modules/article/bookcase.php', {
                 headers: {
                     "SESSIONID": session,
@@ -38,7 +38,7 @@ const getBookCaseList = async (ctx) => {
                     "Host": "j.facerome.com",
                     "Connection": "Keep-Alive",
                     "Accept-Encoding": "gzip",
-                    "Cookie": cookie,
+                    // "Cookie": cookie,
                 },
                 params: {
                     "time": await getTimeStamp(),
