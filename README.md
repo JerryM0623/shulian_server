@@ -1,5 +1,24 @@
 # shulian_server
 
-复刻书连软件的时候，因为种种原因无法实现开发阶段的跨域请求，最终决定编写一个 node.js 的服务器用于解决跨域问题。
+用于为 `uniapp` 项目 `shulian_clone` 提供服务端支持，而开发的服务端项目，使用 `koa2` 作为主框架进行开发。
 
-同时，书连的服务器因为创立时间较早，现运行时间过长的原因，其 api 的响应体内容较为庞大且难以清楚直观的获取到所需数据。重新编写服务器之后，软件直接访问本服务器便可清晰的获取到对应的数据。
+## quickly start
+
+1. 克隆本仓库
+   
+   ```shell
+   git clone git@github.com:xxxzl-JerryM/shulian_server.git
+   ```
+
+2. 安装依赖
+   
+   ```shell
+   npm install
+   ```
+
+3. 运行脚本
+   
+   ```shell
+   npm install -g nodemon(已安装请忽略)
+   npm run dev
+   ```
